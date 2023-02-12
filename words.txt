@@ -2,3 +2,8 @@ event
 plane
 straw
 berry
+diary
+green
+doors
+biker
+hiker

@@ -22,13 +22,17 @@ def user_guess():
     max_attempts = 5
     #array to store attempts of the word
     previous_guesses = []
+    # words_list = read_words_in_text()
     while attempts != max_attempts:
         guess = input().lower()
         if len(guess) != 5:
             print("Please put a 5 letter word")
             #prevents the attempt from going up since the word is not 5 letters
             continue    
-        #if user input === word print "You got the word",  if user input !== word print "Guess again"   
+        #if user input === word print "You got the word",  if user input !== word print "Guess again" 
+        # if guess not in words_list:
+        #     print("This word doesn't exist")
+        #     continue
         elif guess == word:
             print("You got the word!")
             break
@@ -37,12 +41,24 @@ def user_guess():
             print("You already tried this word.")
             continue
         else: 
-            print("Guess again")
+            display_word = ""
+            #highlighting the letter index of the word
+            # none highlights red
+            # orange highlights the letter is present but at the wrong index
+            # green highlights the letter is present and at the wrong index
+            for i in range(len(word)):
+                if word[i] == guess[i]:
+                    display_word += "\033[1;32m" + word[i] + "\033[0m" 
+                elif guess[i] in word:
+                    display_word += "\033[1;33m" + guess[i] + "\033[0m"
+                else:
+                    display_word += "\033[1;31m" + guess[i] + "\033[0m"
+            print(display_word)
+            print("Guess again.")
             previous_guesses.append(guess)
             attempts += 1
             if attempts == 5:
                 print("Game Over!")
                 break
-
 
 user_guess()
