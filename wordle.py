@@ -18,7 +18,11 @@ word = read_words_in_text()
 def user_guess():
     #number of tries for user to guess word
     attempts = 0
-    for attempts in range(1,6):
+    #max attempts
+    max_attempts = 5
+    #array to store attempts of the word
+    previous_guesses = []
+    while attempts != max_attempts:
         guess = input().lower()
         if len(guess) != 5:
             print("Please put a 5 letter word")
@@ -28,10 +32,17 @@ def user_guess():
         elif guess == word:
             print("You got the word!")
             break
+        #if the new guess is inside the array, user 
+        elif guess in previous_guesses:
+            print("You already tried this word.")
+            continue
         else: 
             print("Guess again")
+            previous_guesses.append(guess)
             attempts += 1
-
+            if attempts == 5:
+                print("Game Over!")
+                break
 
 
 user_guess()
