@@ -19,7 +19,7 @@ def user_guess():
     #number of tries for user to guess word
     attempts = 0
     #max attempts
-    max_attempts = 5
+    max_attempts = 6
     #array to store attempts of the word
     previous_guesses = []
     # words_list = read_words_in_text()
@@ -57,8 +57,24 @@ def user_guess():
             print("Guess again.")
             previous_guesses.append(guess)
             attempts += 1
-            if attempts == 5:
+            if attempts == 6:
                 print("Game Over!")
                 break
 
 user_guess()
+
+
+def play_again():
+    while True:
+        user_input = input("Would you like to play again (y/n): ").lower()
+        if user_input == "y":
+            game_start()
+            user_guess()
+            break
+        elif user_input == "n":
+            print("Thanks for playing")
+            break
+        else:
+            print("Please type y or n")
+
+play_again()
