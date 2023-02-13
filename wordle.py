@@ -11,9 +11,15 @@ def read_words_in_text():
         words = f.read().splitlines()
         return random.choice(words)
 
+def word_list():
+    with open('words.txt') as f:
+        words_list = f.read()
+        return(words_list)
 
 game_start()
 word = read_words_in_text()
+list_of_words = word_list()
+
 
 def user_guess():
     #number of tries for user to guess word
@@ -22,7 +28,6 @@ def user_guess():
     max_attempts = 6
     #array to store attempts of the word
     previous_guesses = []
-    # words_list = read_words_in_text()
     while attempts != max_attempts:
         guess = input().lower()
         if len(guess) != 5:
@@ -30,9 +35,9 @@ def user_guess():
             #prevents the attempt from going up since the word is not 5 letters
             continue    
         #if user input === word print "You got the word",  if user input !== word print "Guess again" 
-        # if guess not in words_list:
-        #     print("This word doesn't exist")
-        #     continue
+        if guess not in list_of_words:
+            print("This word doesn't exist")
+            continue
         elif guess == word:
             print("You got the word!")
             break
@@ -59,6 +64,7 @@ def user_guess():
             attempts += 1
             if attempts == 6:
                 print("Game Over!")
+                print("The word was " + word )
                 break
 
 user_guess()
