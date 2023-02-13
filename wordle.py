@@ -39,7 +39,8 @@ def user_guess():
             print("This word doesn't exist")
             continue
         elif guess == word:
-            print("You got the word!")
+            print("You got the word! The word was: " + word + " .")
+            print("It took you " + str(attempts) + " attempts!")
             break
         #if the new guess is inside the array, user 
         elif guess in previous_guesses:
