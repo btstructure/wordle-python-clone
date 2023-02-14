@@ -17,11 +17,11 @@ def word_list():
         return(words_list)
 
 game_start()
-word = read_words_in_text()
 list_of_words = word_list()
 
 
 def user_guess():
+    word = read_words_in_text()
     #number of tries for user to guess word
     attempts = 0
     #max attempts
@@ -75,13 +75,16 @@ def play_again():
     while True:
         user_input = input("Would you like to play again (y/n): ").lower()
         if user_input == "y":
+            read_words_in_text()
             game_start()
             user_guess()
+            play_again()
             break
         elif user_input == "n":
             print("Thanks for playing")
             break
         else:
             print("Please type y or n")
+
 
 play_again()
