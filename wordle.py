@@ -28,8 +28,12 @@ def user_guess():
     max_attempts = 6
     #array to store attempts of the word
     previous_guesses = []
+    
+    word_counts = {letter: word.count(letter) for letter in word}
+
     while attempts != max_attempts:
         guess = input().lower()
+        guess_counts = {letter: guess.count(letter) for letter in guess}
         if len(guess) != 5:
             print("Please put a 5 letter word")
             #prevents the attempt from going up since the word is not 5 letters
@@ -54,9 +58,11 @@ def user_guess():
             # green highlights the letter is present and at the wrong index
             for i in range(len(word)):
                 if word[i] == guess[i]:
-                    display_word += "\033[1;32m" + word[i] + "\033[0m" 
-                elif guess[i] in word:
+                    display_word += "\033[1;32m" + word[i] + "\033[0m"
+                    word_counts[word[i]] -= 1 
+                elif guess[i] in word_counts and guess_counts[guess[i]] <= word_counts[guess[i]]:
                     display_word += "\033[1;33m" + guess[i] + "\033[0m"
+                    word_counts[guess[i]] -= 1
                 else:
                     display_word += "\033[1;31m" + guess[i] + "\033[0m"
             print(display_word)
